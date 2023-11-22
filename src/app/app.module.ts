@@ -7,18 +7,22 @@ import { ArticlesComponent } from './articles/articles.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DetailsArticleComponent } from './details-article/details-article.component';
 import { UpdateArticleComponent } from './update-article/update-article.component';
+import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticlesComponent,
     DetailsArticleComponent,
-    UpdateArticleComponent
+    UpdateArticleComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
