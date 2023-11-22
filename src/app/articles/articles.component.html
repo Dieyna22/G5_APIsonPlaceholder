@@ -1,11 +1,10 @@
-<!-- <p>articles works!</p>
-<p>{{recupArticle |json}}</p> -->
-
 <div class="container">
     <h1 class="mt-5 text-center">📝 Liste des Articles </h1>
     <button type="button" class="btn btnColor mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Ajout Article
     </button>
+
+
     <input class="form-control me-2 mt-4" type="search" placeholder="Search" aria-label="Search" name="searchArticle"
         [(ngModel)]="searchArticle" (input)="articleFound()">
     <!-- declarer les condition dans ng conatenere -->
