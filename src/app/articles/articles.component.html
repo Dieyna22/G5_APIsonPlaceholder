@@ -4,9 +4,6 @@
         Ajout Article
     </button>
 
-
-
-
     <input class="form-control me-2 mt-4" type="search" placeholder="Search" aria-label="Search" name="searchArticle"
         [(ngModel)]="searchArticle" (input)="articleFound()">
     <!-- declarer les condition dans ng conatenere -->
@@ -67,11 +64,11 @@
               <form (ngSubmit)="ajouterArticle()">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Titre</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" name="inputTitre" [(ngModel)]="nouvelArticle.title">
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="inputTitre" [(ngModel)]="addArticle.title">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Contenue</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="inputBody" [(ngModel)]="nouvelArticle.body" ></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="inputBody" [(ngModel)]="addArticle.body" ></textarea>
                     </div>
               </form>
             </div>
