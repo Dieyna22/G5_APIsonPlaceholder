@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ArticlesComponent } from '../articles/articles.component';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,7 @@ export class ArticleServiceService {
     return this.http.get('https://jsonplaceholder.typicode.com/posts');
   }
 
+
   // Méthode pour récupérer un article par son ID
   getArticlesID(id:number): Observable<any>{
     const url = `${this.apiUrl}/${id}`;
@@ -27,4 +30,10 @@ export class ArticleServiceService {
     return this.http.get<any[]>(url);
   }
 
+
+  getUsers() {
+    return this.http.get('https://jsonplaceholder.typicode.com/users');
+  }
+
 }
+
