@@ -24,7 +24,7 @@ export class ArticlesComponent {
   searchArticle = '';
   itemSearch: any;
 
-  constructor(private articlesService: ArticleServiceService) { }
+
   ngOnInit() {
     // this.itemSearch = this.recupArticle;
     this.articlesService.getArticles().subscribe((articles: any) => {
