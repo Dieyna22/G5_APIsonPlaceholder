@@ -22,7 +22,7 @@ export class ArticlesComponent {
     this.articlesService.getArticles().subscribe((articles: any) => {
       this.recupArticle = articles;
     })
-    console.log(this.envoyerRequete())
+    console.log(this.envoyerRequete());
 
   }
  voirPlus(article: any) {
@@ -52,7 +52,7 @@ export class ArticlesComponent {
 
     this.http.post(url, postData)
       .subscribe((response) => {
-        console.error(response);
+        console.log(response);
         return response;
       });
   }
