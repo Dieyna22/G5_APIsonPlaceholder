@@ -34,8 +34,12 @@ export class ArticlesComponent {
   ngOnInit() {
     // this.itemSearch = this.recupArticle;
     this.articlesService.getArticles().subscribe((articles: any) => {
-      this.recupArticle = articles;
+      this.recupArticle =articles;
     })
+
+    if (!localStorage.getItem("Articles")) {
+      localStorage.setItem("Articles", JSON.stringify(this.recupArticle));
+    }
   }
 
  voirPlus(article: any) {
@@ -90,19 +94,22 @@ export class ArticlesComponent {
       (item: any) => (item?.title.toLowerCase().includes(this.searchArticle.toLowerCase())));
   }
 
-  posts: any[] = [];
-  nouvelArticle = { title: this.inputTitre, body: this.inputBody};
+ addArticle = {
+    title: this.inputTitre,
+    body: this.inputBody,
+  };
 
   ajouterArticle() {
-    const titreTemporaire = this.nouvelArticle.title;
-    const contenuTemporaire = this.nouvelArticle.body;
+    const titreTemporaire = this.addArticle.title;
+    const contenuTemporaire = this.addArticle.body;
 
-    this.ajoutArticle.PostArticle(this.nouvelArticle).subscribe((response: any) => {
+    this.ajoutArticle.PostArticle(this.addArticle).subscribe((response: any) => {
       console.log('Réponse du service après ajout d\'article :', response);
-      this.posts.push(response); // Ajouter le nouvel article à la liste existante
-   
+      this.recupArticle.push(response); // Ajouter le nouvel article à la liste existante
+      // On met à jour le tableau qui est stocké dans le localStorage 
+      localStorage.setItem("Articles", JSON.stringify(this.recupArticle));
 
-      this.nouvelArticle = { title: '', body: '' };
+      this.addArticle = { title: '', body: '' };
     });
 
     // Afficher les valeurs pour le débogage
