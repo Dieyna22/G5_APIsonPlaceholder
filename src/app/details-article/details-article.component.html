@@ -1,15 +1,13 @@
 <div class="container">
     <button class="btn mt-3 btnColor" [routerLink]="['/article']">Articles</button>
     <h1 class="text-center"> Détails de l'article 📰</h1>
-    <div class="detail">
-        <h1>sunt aut facere repellat provident occaecati excepturi optio reprehenderit</h1>
-        <p>quia et suscipit suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis ab quaerat consequuntur libero adipisci dolorem assumenda repellendus maxime nisi optio, nobis ducimus consequatur nesciunt accusantium aliquam voluptates quas, fugiat ipsa? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi tempora exercitationem quos numquam, quis animi soluta ab beatae perferendis at praesentium a eveniet unde harum quas labore alias itaque veritatis? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore architecto iusto perspiciatis eum omnis aliquid, quidem minus quo ipsum eveniet nisi earum aut molestias sequi illo dolorum rerum veniam vel?
-        Cumque veniam doloremque fuga ab illum nam ipsum, ex tenetur aliquid! Iusto blanditiis, enim officia voluptates nulla cum suscipit, cumque rerum consequatur modi, itaque culpa maxime iure voluptatem dolorem temporibus?
-        Enim molestiae dignissimos illo architecto? Doloremque autem vero sequi dicta placeat explicabo a culpa totam nam sapiente eos, exercitationem commodi eaque saepe aliquam error officiis, sunt corrupti nemo optio. Velit.
-        Quidem labore neque sed molestiae sit sint eveniet laudantium reiciendis, odit esse animi iusto, harum ipsa distinctio accusamus. Aliquam fugiat distinctio voluptate corporis fuga ipsa, dolorem consequuntur nulla sint iure! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi, non praesentium. Fuga ipsam, iure praesentium minima blanditiis dolores quibusdam molestias illum similique, labore officia commodi veritatis ipsum eaque fugit cum?
-        Maiores ad quia velit odio nesciunt, accusantium laboriosam veritatis eaque iste soluta sint minima a placeat! Atque neque nihil eligendi tempora officia inventore aliquam voluptatem sapiente earum voluptates, velit illo?
-        Maxime numquam quae reprehenderit ab esse amet velit ratione a nisi earum repudiandae, eum vero obcaecati, temporibus ipsa explicabo ipsum, necessitatibus nulla dolorem dolor excepturi optio aspernatur veniam! Adipisci, saepe!
-        Quia iste, neque ipsa quaerat quidem nostrum, aperiam nulla facilis veniam ea possimus quo? Enim, iste facere sequi assumenda nam dolorem praesentium, eligendi quasi atque veniam consectetur provident, illum libero. lorem *4
-     </p>
+    <div class="" >
+        <div class="detail" *ngIf="articleDetails">
+            <h1>{{ articleDetails.title }}</h1>
+            <p>{{ articleDetails.body }}</p>
+        </div>
+        <div class="comments container mt-5" style="width: 50%; margin: 0;">
+            <h3>Liste des commentaires</h3>
+        </div>
     </div>
 </div>
