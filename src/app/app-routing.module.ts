@@ -5,6 +5,7 @@ import { ArticlesComponent } from './articles/articles.component';
 
 const routes: Routes = [
   {path:'detailarticle/:id', component:DetailsArticleComponent},
+  { path: '', redirectTo: 'article', pathMatch: 'full' },
   {path:'article', component:ArticlesComponent},
 ];
 
