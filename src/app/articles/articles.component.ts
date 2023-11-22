@@ -16,9 +16,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ArticlesComponent {
   recupArticle: any;
 
-  
   articleId:any;
-
   AjoutArticle: any;
 
   constructor(private http : HttpClient,private articlesService: ArticleServiceService, private ajoutArticle: AjoutArticleServiceService,private deleteService:DeleteServiceService) { }
@@ -26,23 +24,26 @@ export class ArticlesComponent {
   searchArticle = '';
   itemSearch: any;
 
+
   ngOnInit() {
-    this.itemSearch = this.recupArticle;
+    // this.itemSearch = this.recupArticle;
     this.articlesService.getArticles().subscribe((articles: any) => {
       this.recupArticle =articles;
     })
-    console.log(this.envoyerRequete())
+
+    console.log(this.envoyerRequete());
+
 
   }
+
  voirPlus(article: any) {
     console.log(article);
   }
 
+
   deleteArticle(articleId:any){
     console.log(articleId)
   }
-}
-
   userId: any;
   userName: any;
   userEmail: any;
@@ -56,7 +57,7 @@ export class ArticlesComponent {
       email: this.userEmail
     };
   }
-  
+
   envoyerRequete() {
     const url = 'https://jsonplaceholder.typicode.com/posts';
     const postData = {
@@ -67,9 +68,15 @@ export class ArticlesComponent {
 
     this.http.post(url, postData)
       .subscribe((response) => {
-        console.error(response);
+        console.log(response);
         return response;
       });
   }
- }
+}
+
+
+ 
+  
+ 
+ 
 

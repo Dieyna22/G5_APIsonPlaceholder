@@ -11,6 +11,8 @@ export class UpdateArticleComponent {
   articleId: any;
 
   constructor(private articleService: DeleteServiceService) {}
+
+  
   
 
 //   deleteArticle(articleId:any){
