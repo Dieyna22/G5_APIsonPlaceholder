@@ -17,9 +17,9 @@ export class ArticlesComponent {
     })
     
   }
- voirPlus(article: any) {
+//  voirPlus(article: any) {
   
-    console.log(article);
-  }
+//     console.log(article);
+//   }
 
 }
