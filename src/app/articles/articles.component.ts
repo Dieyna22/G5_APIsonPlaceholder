@@ -20,4 +20,8 @@ export class ArticlesComponent {
       this.recupArticle = articles;
     })
   }
+ voirPlus(article: any) {
+  
+    console.log(article);
+  }
 }
