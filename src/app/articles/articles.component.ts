@@ -15,10 +15,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ArticlesComponent {
   recupArticle: any;
-
-  
   articleId:any;
-
   AjoutArticle: any;
 
   constructor(private http : HttpClient,private articlesService: ArticleServiceService, private ajoutArticle: AjoutArticleServiceService,private deleteService:DeleteServiceService) { }
@@ -34,6 +31,7 @@ export class ArticlesComponent {
     console.log(this.envoyerRequete());
 
   }
+
  voirPlus(article: any) {
     console.log(article);
   }
@@ -41,8 +39,6 @@ export class ArticlesComponent {
   deleteArticle(articleId:any){
     console.log(articleId)
   }
-}
-
   userId: any;
   userName: any;
   userEmail: any;
@@ -56,7 +52,7 @@ export class ArticlesComponent {
       email: this.userEmail
     };
   }
-  
+
   envoyerRequete() {
     const url = 'https://jsonplaceholder.typicode.com/posts';
     const postData = {
@@ -71,5 +67,11 @@ export class ArticlesComponent {
         return response;
       });
   }
- }
+}
+
+
+ 
+  
+ 
+ 
 
