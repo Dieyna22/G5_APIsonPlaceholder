@@ -1,26 +1,65 @@
 <div class="container">
-    <h1 class="mt-5 text-center">📝Liste Articles</h1>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btnColor fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">
-       Ajout Article
+    <h1 class="mt-5 text-center">📝 Liste des Articles </h1>
+    <button type="button" class="btn btnColor mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Ajout Article
     </button>
-    <div class="row">
-        <div class="col-12 col-md-4 " *ngFor="let article of recupArticle">
-            <div class="card mt-4 mb-3 cardArticle">
-                <div class="card-body">
-                    <h5 class="card-title colorTitle">{{article.title}}</h5>
-                    <p class="card-text colorText">{{article.body}}</p>
-
-                    <button class="btn mt-3 btnColor" [routerLink]="['/detailarticle', article.id]" (click)="voirPlus(article.id)">Voir plus</button>
-
-                    
-                    <button class="btn mt-3  btnColor "(click)="deleteArticle(articleId)">Supprimer l'article </button>
-
+    <input class="form-control me-2 mt-4" type="search" placeholder="Search" aria-label="Search" name="searchArticle"
+        [(ngModel)]="searchArticle" (input)="articleFound()">
+    <!-- declarer les condition dans ng conatenere -->
+    <ng-container *ngIf="!searchArticle; then default else onSearch"></ng-container>
+    <!-- premiere condition -->
+    <ng-template #default>
+        <div class="row">
+            <div class="col-12 col-md-4 " *ngFor="let article of getArticlesPage()">
+                <div class="card mt-4 mb-3 cardArticle">
+                    <div class="card-body">
+                        <h5 class="card-title colorTitle">{{article.title}}</h5>
+                        <p class="card-text colorText">{{article.body}}</p>
+        
+                        <button class="btn mt-3 me-2 btnColor" [routerLink]="['/detailarticle', article.id]"
+                            (click)="voirPlus(article.id)">Voir plus</button>
+                        <button class="btn mt-3 me-2 btnColor" (click)="MAJUsers(article.id)">modifier</button>
+                        <button class="btn mt-3  btnColor " (click)="deleteArticle(article.id)">Supprimer</button>
+        
+                    </div>
+        
                 </div>
-                
             </div>
         </div>
-    </div>
+    </ng-template>
+    <!-- deuxieme condition -->
+    <ng-template #onSearch>
+        <div class="row">
+            <div class="col-12 col-md-4 " *ngFor="let article of itemSearch">
+                <div class="card mt-4 mb-3 cardArticle">
+                    <div class="card-body">
+                        <h5 class="card-title colorTitle">{{article.title}}</h5>
+                        <p class="card-text colorText">{{article.body}}</p>
+        
+                        <button class="btn mt-3 me-2 btnColor" [routerLink]="['/detailarticle', article.id]"
+                            (click)="voirPlus(article.id)">Voir plus</button>
+                        <button class="btn mt-3 me-2 btnColor" (click)="MAJUsers(article.id)">modifier</button>
+                        <button class="btn mt-3  btnColor " (click)="deleteArticle(articleId)">Supprimer</button>
+        
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <!-- pour la pagination -->
+    <div class="d-flex justify-content-center my-5">
+        <button class="btn btnColor me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
+          Précédent
+        </button>
+        <button class="btn btnColor ms-2" *ngFor="let page of pages" (click)="pageActuelle = page">
+          {{ page }}
+        </button>
+        <button class="btn btnColor ms-2" [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
+          Suivant
+        </button>
+      </div>
 </div>
 
 
@@ -33,19 +72,19 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form>
+              <form (ngSubmit)="ajouterArticle()">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Titre</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1">
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="inputTitre" [(ngModel)]="nouvelArticle.title">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Contenue</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="inputBody" [(ngModel)]="nouvelArticle.body" ></textarea>
                     </div>
               </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btnColor">Ajout</button>
+                <button type="button" class="btn btnColor" (click)="ajouterArticle()">Ajout</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
