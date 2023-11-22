@@ -1,0 +1,50 @@
+<!-- <p>articles works!</p>
+<p>{{recupArticle |json}}</p> -->
+
+<div class="container">
+    <h1 class="mt-5 text-center">📝Liste Articles</h1>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btnColor fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">
+       Ajout Article
+    </button>
+    <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchArticle" [(ngModel)]="searchArticle" (input)="articleFound()"> -->
+    <div class="row">
+        <div class="col-12 col-md-4 " *ngFor="let article of recupArticle ">
+            <div class="card mt-4 mb-3 cardArticle">
+                <div class="card-body">
+                    <h5 class="card-title colorTitle">{{article.title}}</h5>
+                    <p class="card-text colorText">{{article.body}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ajout Article</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Titre</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Contenue</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnColor">Ajout</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
