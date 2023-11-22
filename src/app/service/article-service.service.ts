@@ -12,5 +12,9 @@ export class ArticleServiceService {
   getArticles() {
     return this.http.get('https://jsonplaceholder.typicode.com/posts');
   }
+
+  getUsers() {
+    return this.http.get('https://jsonplaceholder.typicode.com/users');
+  }
 }
 
