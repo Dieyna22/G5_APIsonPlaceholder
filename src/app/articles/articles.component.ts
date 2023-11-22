@@ -23,4 +23,8 @@ export class ArticlesComponent {
 
     console.log(this.ajoutArticle.envoyerRequete()); 
   }
+ voirPlus(article: any) {
+  
+    console.log(article);
+  }
 }

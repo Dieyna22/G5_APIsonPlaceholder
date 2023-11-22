@@ -14,6 +14,7 @@
                 <div class="card-body">
                     <h5 class="card-title colorTitle">{{article.title}}</h5>
                     <p class="card-text colorText">{{article.body}}</p>
+                    <button class="btn mt-3 btnColor" [routerLink]="['/detailarticle']" (click)="voirPlus(article.id)">Voir plus</button>
                 </div>
             </div>
         </div>
