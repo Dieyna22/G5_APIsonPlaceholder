@@ -7,16 +7,18 @@ import { Observable } from 'rxjs';
 })
 export class DeleteServiceService {
 
-  private apiUrl='https://jsonplaceholder.typicode.com/posts/'
+  // private apiUrl='https://jsonplaceholder.typicode.com/posts/'
+  // deleteArticle: any;
 
-  constructor(private http: HttpClient) { }
+  // constructor(private http: HttpClient) { }
 
+  // getuserID(articleId:number): Observable<any>{
+  //   const url = `${this.apiUrl}/${articleId}`;
+  //   return this.http.delete(url);
+  // }
   // deleteArticle(articleId: number): Observable<any> {
   //   const url = `${this.apiUrl}/articles/${articleId}`;
   //   return this.http.delete(url);
   // }
-  getuserID(userId:number): Observable<any>{
-    const url = `${this.apiUrl}/${userId}`;
-    return this.http.get(url);
-  }
+
 }
