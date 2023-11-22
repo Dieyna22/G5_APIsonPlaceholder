@@ -13,6 +13,7 @@ export class LoginComponent {
   emailLogin: string = "";
   passwordLogin: string = "";
   recupUser: any;
+  userFound: any;
 
   // Notre constructeur
   constructor(private route: Router, private userService: ArticleServiceService,) { }
@@ -37,6 +38,7 @@ export class LoginComponent {
     } else if (this.passwordLogin.length < 5) {
       this.alertMessage("error", "Attention", "Le mot de passe doit contenir plus de huit caractéres");
     } else {
+      this.userFound = this.recupUser.find((element: any) => element.emailAdminLogin == this.emailLogin && element.passwordAdminLogin == this.passwordLogin);
     
     }
 
