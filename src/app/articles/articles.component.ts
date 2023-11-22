@@ -1,18 +1,27 @@
 import { Component } from '@angular/core';
 import { ArticleServiceService } from '../service/article-service.service';
+
+import { DeleteServiceService } from '../service/delete-service.service';
+
 import { AjoutArticleServiceService } from '../service/ajout-article-service.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.css']
+  styleUrls: ['./articles.component.css'],
+  
 })
 export class ArticlesComponent {
   recupArticle: any;
+
+  
+  articleId:any;
+
   AjoutArticle: any;
 
-  constructor(private http : HttpClient,private articlesService: ArticleServiceService, private ajoutArticle: AjoutArticleServiceService) { }
+  constructor(private http : HttpClient,private articlesService: ArticleServiceService, private ajoutArticle: AjoutArticleServiceService,private deleteService:DeleteServiceService) { }
 
   searchArticle = '';
   itemSearch: any;
@@ -28,6 +37,12 @@ export class ArticlesComponent {
  voirPlus(article: any) {
     console.log(article);
   }
+
+  deleteArticle(articleId:any){
+    console.log(articleId)
+  }
+}
+
   userId: any;
   userName: any;
   userEmail: any;
@@ -57,3 +72,4 @@ export class ArticlesComponent {
       });
   }
  }
+
