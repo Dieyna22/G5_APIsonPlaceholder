@@ -11,8 +11,12 @@ export class DeleteServiceService {
 
   constructor(private http: HttpClient) { }
 
-  deleteArticle(articleId: number): Observable<any> {
-    const url = `${this.apiUrl}/articles/${articleId}`;
-    return this.http.delete(url);
+  // deleteArticle(articleId: number): Observable<any> {
+  //   const url = `${this.apiUrl}/articles/${articleId}`;
+  //   return this.http.delete(url);
+  // }
+  getuserID(userId:number): Observable<any>{
+    const url = `${this.apiUrl}/${userId}`;
+    return this.http.get(url);
   }
 }
