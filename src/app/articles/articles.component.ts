@@ -19,7 +19,7 @@ export class ArticlesComponent {
   ngOnInit() {
     this.itemSearch = this.recupArticle;
     this.articlesService.getArticles().subscribe((articles: any) => {
-      this.recupArticle = articles;
+      this.recupArticle =articles;
     })
   }
  voirPlus(article: any) {
