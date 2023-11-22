@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import { ActivatedRoute } from '@angular/router';
+
+
 @Component({
   selector: 'app-details-article',
   templateUrl: './details-article.component.html',
@@ -7,4 +10,5 @@ import { Component } from '@angular/core';
 })
 export class DetailsArticleComponent {
 
+  // idPostClick = +this.route.snapshot.params['id'];
 }
