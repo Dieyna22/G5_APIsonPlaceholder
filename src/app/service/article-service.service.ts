@@ -9,7 +9,7 @@ import { ArticlesComponent } from '../articles/articles.component';
 })
 export class ArticleServiceService {
   apiUrl="https://jsonplaceholder.typicode.com/posts"
-  endpointUrl="https://jsonplaceholder.typicode.com/comments";
+
   constructor(private http: HttpClient) { }
 
   // Méthode pour récupérer les articles
@@ -24,9 +24,10 @@ export class ArticleServiceService {
     return this.http.get(url);
   }
 
-  // Méthode pour recupérer les commentaires
- getCommentsByArticleID(articleID: number): Observable<any[]> {
-    const url = `${this.apiUrl}/${articleID}/comments`;
+   // Méthode pour récupérer les commentaire d'un article 
+  getCommentsByArticleID(articleID: number): Observable<any[]> {
+    // Construire l'URL avec l'id de l'article
+    const url = `${this.apiUrl}/${articleID}/comments`; 
     return this.http.get<any[]>(url);
   }
 
