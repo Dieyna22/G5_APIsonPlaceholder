@@ -36,5 +36,10 @@ export class ArticleServiceService {
     return this.http.get('https://jsonplaceholder.typicode.com/users');
   }
 
+   // Méthode pour supprimer un article 
+  deleteArticle(articleId: any): Observable<any> {
+    const url = `https://jsonplaceholder.typicode.com/posts/${articleId}`;
+    return this.http.delete(url);
+  }
 }
 

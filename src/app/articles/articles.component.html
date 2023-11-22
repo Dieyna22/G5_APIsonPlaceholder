@@ -11,7 +11,7 @@
     <!-- premiere condition -->
     <ng-template #default>
         <div class="row">
-            <div class="col-12 col-md-4 " *ngFor="let article of recupArticle">
+            <div class="col-12 col-md-4 " *ngFor="let article of getArticlesPage()">
                 <div class="card mt-4 mb-3 cardArticle">
                     <div class="card-body">
                         <h5 class="card-title colorTitle">{{article.title}}</h5>
@@ -20,7 +20,7 @@
                         <button class="btn mt-3 me-2 btnColor" [routerLink]="['/detailarticle', article.id]"
                             (click)="voirPlus(article.id)">Voir plus</button>
                         <button class="btn mt-3 me-2 btnColor" (click)="MAJUsers(article.id)">modifier</button>
-                        <button class="btn mt-3  btnColor " (click)="deleteArticle(articleId)">Supprimer</button>
+                        <button class="btn mt-3  btnColor " (click)="deleteArticle(article.id)">Supprimer</button>
         
                     </div>
         
@@ -49,6 +49,19 @@
             </div>
         </div>
     </ng-template>
+
+    <!-- pour la pagination -->
+    <div class="d-flex justify-content-center my-5">
+        <button class="btn btnColor me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
+          Précédent
+        </button>
+        <button class="btn btn-danger ms-2" *ngFor="let page of pages" (click)="pageActuelle = page">
+          {{ page }}
+        </button>
+        <button class="btn btnColor ms-2" [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
+          Suivant
+        </button>
+      </div>
 </div>
 
 

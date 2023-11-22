@@ -20,13 +20,16 @@ export class ArticlesComponent {
 
   inputTitre: string = '';
   inputBody: string = '';
-
+  
+  // Attribut pour la pagination
+  articlesParPage = 10; // Nombre d'articles par page
+  pageActuelle = 1; // Page actuelle
 
   constructor(private http : HttpClient,private articlesService: ArticleServiceService, private ajoutArticle: AjoutArticleServiceService,private deleteService:DeleteServiceService) { }
 
-
   searchArticle = '';
   itemSearch: any;
+
 
   ngOnInit() {
     // this.itemSearch = this.recupArticle;
@@ -44,9 +47,9 @@ export class ArticlesComponent {
   }
 
 
-  deleteArticle(articleId:any){
-    console.log(articleId)
-  }
+  // deleteArticle(articleId:any){
+  //   console.log(articleId)
+  // }
 
   userName: any;
   userEmail: any;
@@ -111,5 +114,30 @@ export class ArticlesComponent {
 
     // Afficher les valeurs pour le débogage
     console.log('Valeurs après ajout :', titreTemporaire, contenuTemporaire);
+  }
+
+  // Pour supprimer un article
+  deleteArticle(articleId: any) {
+    this.articlesService.deleteArticle(articleId).subscribe(() => {
+      // Supprimer l'article de la liste des articles
+      this.recupArticle = this.recupArticle.filter((article: any) => article.id !== articleId);
+    });
+  }
+
+  // Méthode pour déterminer les articles à afficher sur la page actuelle
+  getArticlesPage(): any[] {
+    const indexDebut = (this.pageActuelle - 1) * this.articlesParPage;
+    const indexFin = indexDebut + this.articlesParPage;
+    return this.recupArticle.slice(indexDebut, indexFin);
+  }
+   // Méthode pour générer la liste des pages
+   get pages(): number[] {
+    const totalPages = Math.ceil(this.recupArticle.length / this.articlesParPage);
+    return Array(totalPages).fill(0).map((_, index) => index + 1);
+  }
+
+  // Méthode pour obtenir le nombre total de pages
+  get totalPages(): number {
+    return Math.ceil(this.recupArticle.length / this.articlesParPage);
   }
 }
