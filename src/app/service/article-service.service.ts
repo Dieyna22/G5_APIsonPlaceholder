@@ -9,6 +9,7 @@ import { ArticlesComponent } from '../articles/articles.component';
 })
 export class ArticleServiceService {
   apiUrl="https://jsonplaceholder.typicode.com/posts"
+  toggleArticleArchive: any;
 
   constructor(private http: HttpClient) { }
 
@@ -35,11 +36,22 @@ export class ArticleServiceService {
   getUsers() {
     return this.http.get('https://jsonplaceholder.typicode.com/users');
   }
+  // Fonction pour archiver l'article au lieu de le supprimer
+archiverArticle(articleId: any): Observable<any> {
+  return this.http.patch(`https://jsonplaceholder.typicode.com/posts/${articleId}`, { archived: true });
+}
 
    // Méthode pour supprimer un article 
   deleteArticle(articleId: any): Observable<any> {
     const url = `https://jsonplaceholder.typicode.com/posts/${articleId}`;
     return this.http.delete(url);
   }
+  //methode pour archiver un article
+  // archiveArticle(articleId: any): Observable<any> {
+  //   const url = `https://jsonplaceholder.typicode.com/posts/${articleId}`;
+  //   // Vous pouvez utiliser une méthode PATCH pour marquer l'article comme archivé
+  //   return this.http.patch(url, { archived: true });
+  // }
+  
 }
 
