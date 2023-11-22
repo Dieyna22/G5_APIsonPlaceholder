@@ -19,6 +19,7 @@ export class DetailsArticleComponent {
 
   // attributs pour récupérer les commentaires de l'article
     recupComment:any;
+  archivedArticles: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,4 +47,26 @@ export class DetailsArticleComponent {
       this.articleDetails = article;
     });
   }
+
+  
+  // archiver(article: Article): void {
+  //   // const index = this.tabArticlesUser.indexOf(article);
+  //   const index=this.articleDetails
+  //   if (index !== -1) {
+  //     const archivedArticle = this.articleDetails.splice(index, 1)[0];
+  //     this.archivedArticles.push(archivedArticle);
+  //     console.log('Article archivé avec succès.');
+  //     console.log(this.archivedArticles);
+
+  //     // Envoyer une requête HTTP PUT ou PATCH pour mettre à jour l'article archivé sur l'API JSONPlaceholder
+  //     this.http.put(`https://jsonplaceholder.typicode.com/posts/${archivedArticle.id}`, archivedArticle)
+  //       .subscribe(() => {
+  //         console.log('Article archivé mis à jour avec succès sur l\'API.');
+  //       }, (error: any) => {
+  //         console.error('Erreur lors de la mise à jour de l\'article archivé sur l\'API :', error);
+  //       });
+  //   } else {
+  //     console.log('Article non trouvé dans la liste.');
+  //   }
+  // }
 }

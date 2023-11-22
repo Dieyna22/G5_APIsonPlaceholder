@@ -140,4 +140,6 @@ export class ArticlesComponent {
   get totalPages(): number {
     return Math.ceil(this.recupArticle.length / this.articlesParPage);
   }
+
+  
 }
