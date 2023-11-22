@@ -15,6 +15,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ArticlesComponent {
   recupArticle: any;
+
   articleId:any;
   AjoutArticle: any;
 
@@ -23,18 +24,22 @@ export class ArticlesComponent {
   searchArticle = '';
   itemSearch: any;
 
+  constructor(private articlesService: ArticleServiceService) { }
   ngOnInit() {
-    this.itemSearch = this.recupArticle;
+    // this.itemSearch = this.recupArticle;
     this.articlesService.getArticles().subscribe((articles: any) => {
       this.recupArticle = articles;
     })
+
     console.log(this.envoyerRequete());
+
 
   }
 
  voirPlus(article: any) {
     console.log(article);
   }
+
 
   deleteArticle(articleId:any){
     console.log(articleId)

@@ -9,13 +9,17 @@
     </button>
     <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchArticle" [(ngModel)]="searchArticle" (input)="articleFound()"> -->
     <div class="row">
-        <div class="col-12 col-md-4 " *ngFor="let article of recupArticle ">
+        <div class="col-12 col-md-4 " *ngFor="let article of recupArticle">
             <div class="card mt-4 mb-3 cardArticle">
                 <div class="card-body">
                     <h5 class="card-title colorTitle">{{article.title}}</h5>
                     <p class="card-text colorText">{{article.body}}</p>
-                    <button class="btn mt-3 me-3 btnColor" [routerLink]="['/detailarticle']" (click)="voirPlus(article.id)">Voir plus</button>
+
+                    <button class="btn mt-3 btnColor" [routerLink]="['/detailarticle', article.id]" (click)="voirPlus(article.id)">Voir plus</button>
+
+                    
                     <button class="btn mt-3  btnColor "(click)="deleteArticle(articleId)">Supprimer l'article </button>
+
                 </div>
                 
             </div>
