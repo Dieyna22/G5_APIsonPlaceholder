@@ -15,43 +15,37 @@ export class ArticleServiceService {
 
   // Méthode pour récupérer les articles
   getArticles() {
-    return this.http.get('https://jsonplaceholder.typicode.com/posts');
+    return this.http.get(`${this.apiUrl}`);
   }
 
 
   // Méthode pour récupérer un article par son ID
   getArticlesID(id:number): Observable<any>{
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.get(url);
+    return this.http.get(`${this.apiUrl}/${id}`);
   }
+
 
    // Méthode pour récupérer les commentaire d'un article 
   getCommentsByArticleID(articleID: number): Observable<any[]> {
-    // Construire l'URL avec l'id de l'article
-    const url = `${this.apiUrl}/${articleID}/comments`; 
-    return this.http.get<any[]>(url);
+    return this.http.get<any[]>(`${this.apiUrl}/${articleID}/comments`);
+  }
+
+  // Méthode pour ajouter un articles
+  postArticle(article: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}`, article);
   }
 
 
-  getUsers() {
-    return this.http.get('https://jsonplaceholder.typicode.com/users');
-  }
   // Fonction pour archiver l'article au lieu de le supprimer
-archiverArticle(articleId: any): Observable<any> {
-  return this.http.patch(`https://jsonplaceholder.typicode.com/posts/${articleId}`, { archived: true });
-}
+  archiverArticle(articleId: any): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${articleId}`, { archived: true });
+  }
+
 
    // Méthode pour supprimer un article 
   deleteArticle(articleId: any): Observable<any> {
-    const url = `https://jsonplaceholder.typicode.com/posts/${articleId}`;
-    return this.http.delete(url);
+    return this.http.delete(`${this.apiUrl}/${articleId}`);
   }
-  //methode pour archiver un article
-  // archiveArticle(articleId: any): Observable<any> {
-  //   const url = `https://jsonplaceholder.typicode.com/posts/${articleId}`;
-  //   // Vous pouvez utiliser une méthode PATCH pour marquer l'article comme archivé
-  //   return this.http.patch(url, { archived: true });
-  // }
   
 }
 

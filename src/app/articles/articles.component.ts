@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 import { ArticleServiceService } from '../service/article-service.service';
-
-import { DeleteServiceService } from '../service/delete-service.service';
-
-import { AjoutArticleServiceService } from '../service/ajout-article-service.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -14,7 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   
 })
 export class ArticlesComponent {
-  recupArticle: any;
+  recupArticles: any;
   articleId:any;
   AjoutArticle: any;
 
@@ -25,20 +21,20 @@ export class ArticlesComponent {
   articlesParPage = 10; // Nombre d'articles par page
   pageActuelle = 1; // Page actuelle
 
-  constructor(private http : HttpClient,private articlesService: ArticleServiceService, private ajoutArticle: AjoutArticleServiceService,private deleteService:DeleteServiceService) { }
+  constructor(private http: HttpClient, private articlesService: ArticleServiceService, private ajoutArticleService: ArticleServiceService, private deleteService: ArticleServiceService) { }
 
   searchArticle = '';
-  itemSearch: any;
+  itemSearchs: any;
 
 
   ngOnInit() {
     // this.itemSearch = this.recupArticle;
     this.articlesService.getArticles().subscribe((articles: any) => {
-      this.recupArticle =articles;
+      this.recupArticles =articles;
     })
 
     if (!localStorage.getItem("Articles")) {
-      localStorage.setItem("Articles", JSON.stringify(this.recupArticle));
+      localStorage.setItem("Articles", JSON.stringify(this.recupArticles));
     }
   }
 
@@ -53,18 +49,28 @@ export class ArticlesComponent {
 
   userName: any;
   userEmail: any;
+  currentArticle: any;
+  
+  // Methode pour charger les infos de l'article à modifier
+  chargerInfosArticle(paramArticle: any) {
+    this.currentArticle = paramArticle;
+    this.inputTitre = paramArticle.title;
+    this.inputBody = paramArticle.body;
+  }
 
-  MAJUsers(paramArticle: any) {
-    alert(paramArticle);
-    const urlArticle = `https://jsonplaceholder.typicode.com/users/${paramArticle}`;
+  // Methode pour modifier l'article 
+  MAJArticle() {
+    const titre = this.currentArticle.title = this.inputTitre;
+    const body = this.currentArticle.body = this.inputBody;
+    const urlArticle = `https://jsonplaceholder.typicode.com/posts/${this.currentArticle}`;
     const putData = {
-      id: 1,
-      title: 'foo',
-      body: 'bar',
-      userId: 1,
+      id: this.currentArticle,
+      title: titre,
+      body: body,
+      userId: this.currentArticle.userId,
     }
 
-    this.http.post(urlArticle, putData)
+    this.http.put(urlArticle, putData)
       .subscribe((response) => {
         console.log(response);
         return response;
@@ -72,42 +78,27 @@ export class ArticlesComponent {
     
   }
 
-  // envoyerRequete() {
-  //   const url = 'https://jsonplaceholder.typicode.com/posts';
-  //   const postData = {
-  //     title: this.inputTitre,
-  //     body: this.inputBody,
-  //     userId: 1,
-  //   };
-  //   this.inputTitre = '',
-  //   this.inputBody = '',
-
-  //   this.http.post(url, postData)
-  //     .subscribe((response) => {
-  //       console.log(response);
-  //       return response;
-  //     });
-  // }
 
   articleFound() {
-    this.itemSearch = this.recupArticle.filter(
+    this.itemSearchs = this.recupArticles.filter(
       (item: any) => (item?.title.toLowerCase().includes(this.searchArticle.toLowerCase())));
   }
 
  addArticle = {
     title: this.inputTitre,
     body: this.inputBody,
+    
   };
 
   ajouterArticle() {
     const titreTemporaire = this.addArticle.title;
     const contenuTemporaire = this.addArticle.body;
 
-    this.ajoutArticle.PostArticle(this.addArticle).subscribe((response: any) => {
+    this.ajoutArticleService.postArticle(this.addArticle).subscribe((response: any) => {
       console.log('Réponse du service après ajout d\'article :', response);
-      this.recupArticle.push(response); // Ajouter le nouvel article à la liste existante
+      this.recupArticles.unshift(response); // Ajouter le nouvel article à la liste existante
       // On met à jour le tableau qui est stocké dans le localStorage 
-      localStorage.setItem("Articles", JSON.stringify(this.recupArticle));
+      localStorage.setItem("Articles", JSON.stringify(this.recupArticles));
 
       this.addArticle = { title: '', body: '' };
     });
@@ -118,9 +109,9 @@ export class ArticlesComponent {
 
   // Pour supprimer un article
   deleteArticle(articleId: any) {
-    this.articlesService.deleteArticle(articleId).subscribe(() => {
+    this.deleteService.deleteArticle(articleId).subscribe(() => {
       // Supprimer l'article de la liste des articles
-      this.recupArticle = this.recupArticle.filter((article: any) => article.id !== articleId);
+      this.recupArticles = this.recupArticles.filter((article: any) => article.id !== articleId);
     });
   }
 
@@ -128,18 +119,25 @@ export class ArticlesComponent {
   getArticlesPage(): any[] {
     const indexDebut = (this.pageActuelle - 1) * this.articlesParPage;
     const indexFin = indexDebut + this.articlesParPage;
-    return this.recupArticle.slice(indexDebut, indexFin);
+    return this.recupArticles.slice(indexDebut, indexFin);
   }
    // Méthode pour générer la liste des pages
    get pages(): number[] {
-    const totalPages = Math.ceil(this.recupArticle.length / this.articlesParPage);
+    const totalPages = Math.ceil(this.recupArticles.length / this.articlesParPage);
     return Array(totalPages).fill(0).map((_, index) => index + 1);
   }
 
   // Méthode pour obtenir le nombre total de pages
   get totalPages(): number {
-    return Math.ceil(this.recupArticle.length / this.articlesParPage);
+    return Math.ceil(this.recupArticles.length / this.articlesParPage);
   }
 
+  etatArticle = true;
+
+  toggleArchive(article: any): void {
+    this.etatArticle=!this.etatArticle;
+    article.etat = article.etat === 'active' ? 'inactive' : 'active';
+    
+  }
   
 }

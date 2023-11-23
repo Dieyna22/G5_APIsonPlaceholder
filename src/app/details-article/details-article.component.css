@@ -2,3 +2,11 @@
     background-color: #ee7036 ;
     color: #fff ;
 }
+
+.colorTitle {
+    color: #ee7036;
+    /* text-align: center; */
+    margin-top: 5px;
+    font-weight: bold;
+
+}

@@ -13,18 +13,18 @@
         <div class="row">
             <div class="col-12 col-md-4 " *ngFor="let article of getArticlesPage()">
                 <div class="card mt-4 mb-3 cardArticle">
+                    <img src="https://img.freepik.com/free-photo/creative-copywriting-commercial-text-seo-editing_107791-15687.jpg?w=900&t=st=1700728437~exp=1700729037~hmac=383ef34248f52ee6051f4e4c8240e042c4dbbf68491b015f6dd782a3491c085f" alt="">
                     <div class="card-body">
                         <h5 class="card-title colorTitle">{{article.title}}</h5>
                         <p class="card-text colorText">{{article.body}}</p>
         
                         <button class="btn mt-3 me-2 btnColor" [routerLink]="['/detailarticle', article.id]"
                             (click)="voirPlus(article.id)">Voir plus</button>
-                        <button class="btn mt-3 me-2 btnColor" (click)="MAJUsers(article.id)">modifier</button>
+                        <button class="btn mt-3 me-2 btnColor" data-bs-toggle="modal" data-bs-target="#exampleModalM"
+                            (click)="chargerInfosArticle(article)">modifier</button>
                         <button class="btn mt-3  btnColor " (click)="deleteArticle(article.id)">Supprimer</button>
-        
                     </div>
         
-
                 </div>
             </div>
         </div>
@@ -32,15 +32,17 @@
     <!-- deuxieme condition -->
     <ng-template #onSearch>
         <div class="row">
-            <div class="col-12 col-md-4 " *ngFor="let article of itemSearch">
+            <div class="col-12 col-md-4 " *ngFor="let article of itemSearchs">
                 <div class="card mt-4 mb-3 cardArticle">
+                    <img src="https://img.freepik.com/free-photo/creative-copywriting-commercial-text-seo-editing_107791-15687.jpg?w=900&t=st=1700728437~exp=1700729037~hmac=383ef34248f52ee6051f4e4c8240e042c4dbbf68491b015f6dd782a3491c085f"
+                        alt="">
                     <div class="card-body">
                         <h5 class="card-title colorTitle">{{article.title}}</h5>
                         <p class="card-text colorText">{{article.body}}</p>
         
                         <button class="btn mt-3 me-2 btnColor" [routerLink]="['/detailarticle', article.id]"
                             (click)="voirPlus(article.id)">Voir plus</button>
-                        <button class="btn mt-3 me-2 btnColor" (click)="MAJUsers(article.id)">modifier</button>
+                        <button class="btn mt-3 me-2 btnColor"  data-bs-toggle="modal" data-bs-target="#exampleModalM" (click)="chargerInfosArticle(article)">modifier</button>
                         <button class="btn mt-3  btnColor " (click)="deleteArticle(articleId)">Supprimer</button>
         
                     </div>
@@ -55,7 +57,7 @@
         <button class="btn btnColor me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
           Précédent
         </button>
-        <button class="btn btn-danger ms-2" *ngFor="let page of pages" (click)="pageActuelle = page">
+        <button class="btn btnColor ms-2" *ngFor="let page of pages" (click)="pageActuelle = page">
           {{ page }}
         </button>
         <button class="btn btnColor ms-2" [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
@@ -65,7 +67,7 @@
 </div>
 
 
-<!-- Modal -->
+<!-- Modal ajout -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -87,6 +89,36 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btnColor" (click)="ajouterArticle()">Ajout</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal modifier -->
+<div class="modal fade" id="exampleModalM" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modification</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Titre</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="inputTitre"
+                            [(ngModel)]="inputTitre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Contenue</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="inputBody"
+                            [(ngModel)]="inputBody"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnColor" (click)=" MAJArticle()" data-bs-dismiss="modal">modifier</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
