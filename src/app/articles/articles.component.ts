@@ -28,14 +28,12 @@ export class ArticlesComponent {
 
 
   ngOnInit() {
-    // this.itemSearch = this.recupArticle;
     this.articlesService.getArticles().subscribe((articles: any) => {
-      this.recupArticles =articles;
-    })
+      this.recupArticles = articles;
 
-    if (!localStorage.getItem("Articles")) {
+      // Stocker les données dans localStorage après la récupération réussie
       localStorage.setItem("Articles", JSON.stringify(this.recupArticles));
-    }
+    });
   }
 
  voirPlus(article: any) {
@@ -43,9 +41,6 @@ export class ArticlesComponent {
   }
 
 
-  // deleteArticle(articleId:any){
-  //   console.log(articleId)
-  // }
 
   userName: any;
   userEmail: any;
@@ -73,6 +68,8 @@ export class ArticlesComponent {
     this.http.put(urlArticle, putData)
       .subscribe((response) => {
         console.log(response);
+        // Mettre à jour le local storage après l'ajout
+        localStorage.setItem("Articles", JSON.stringify(this.recupArticles));
         return response;
       });
     
